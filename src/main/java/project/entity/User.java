@@ -1,8 +1,10 @@
 package project.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.*;
 import org.hibernate.Hibernate;
+import project.enums.UserRole;
 
 import java.util.Objects;
 
@@ -20,8 +22,22 @@ public class User {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(name = "first_name")
+    private String firstName;
 
+    @Column(name = "last_name")
+    private String lastName;
 
+    @Column(name = "email")
+    @Email
+    private String email;
+
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "user_role", columnDefinition = "ENUM('CUSTOMER', 'SHOP_OWNER', 'COURIER')")
+    @Enumerated(EnumType.STRING)
+    private UserRole userRole;
 
 
 
