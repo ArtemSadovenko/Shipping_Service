@@ -34,8 +34,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public void update(UserDto user) {
         if (user.getId() == null) {
-            //todo
-//            throw new Exception("w");
             throw new IrregularData("ID expected", HttpStatus.BAD_REQUEST);
         }
         else {

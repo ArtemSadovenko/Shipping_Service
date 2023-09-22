@@ -7,29 +7,29 @@ import project.entity.User;
 @Component
 public class UserMapper {
 
-    public UserDto EntityToDto(User user){
-        UserDto result = new UserDto();
+    public UserDto EntityToDto(User entity){
+        UserDto dto = new UserDto();
 
-        result.setId(user.getId());
-        result.setEmail(user.getEmail());
-        result.setFirstName(user.getFirstName());
-        result.setLastName(user.getLastName());
-        result.setUserRole(user.getUserRole());
-        result.setPassword(user.getPassword());
+        dto.setId(entity.getId());
+        dto.setEmail(entity.getEmail());
+        dto.setFirstName(entity.getFirstName());
+        dto.setLastName(entity.getLastName());
+        dto.setUserRole(entity.getUserRole());
+        dto.setPassword(entity.getPassword());
 
-        return result;
+        return dto;
     }
 
-    public User DtoToEntity(UserDto user){
-        User result = new User();
+    public User DtoToEntity(UserDto dto){
+        User entity = new User();
 
-        result.setId(user.getId());
-        result.setEmail(user.getEmail());
-        result.setFirstName(user.getFirstName());
-        result.setLastName(user.getLastName());
-        result.setUserRole(user.getUserRole());
-        result.setPassword(user.getPassword());
+        entity.setId(dto.getId());
+        entity.setEmail(dto.getEmail());
+        entity.setFirstName(dto.getFirstName());
+        entity.setLastName(dto.getLastName());
+        entity.setUserRole(dto.getUserRole());
+        entity.setPassword(dto.getPassword());
 
-        return result;
+        return entity;
     }
 }

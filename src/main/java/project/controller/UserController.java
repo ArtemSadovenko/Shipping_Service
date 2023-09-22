@@ -31,4 +31,8 @@ public class UserController {
         userService.update(user);
     }
 
+    @GetMapping("/{id}")
+    public UserDto findById(@PathVariable Long id){
+        return userService.getById(id);
+    }
 }
