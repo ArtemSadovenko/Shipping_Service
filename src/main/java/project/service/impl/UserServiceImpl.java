@@ -1,8 +1,10 @@
 package project.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import project.dto.UserDto;
+import project.exeption.IrregularData;
 import project.mapper.UserMapper;
 import project.repository.UserRepository;
 import project.service.UserService;
@@ -34,6 +36,7 @@ public class UserServiceImpl implements UserService {
         if (user.getId() == null) {
             //todo
 //            throw new Exception("w");
+            throw new IrregularData("ID expected", HttpStatus.BAD_REQUEST);
         }
         else {
             userRepository.save(userMapper.DtoToEntity(user));

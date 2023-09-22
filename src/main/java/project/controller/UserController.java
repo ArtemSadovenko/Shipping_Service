@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import project.dto.UserDto;
+import project.enums.UserRole;
 import project.service.UserService;
 
 import java.util.List;
@@ -29,4 +30,5 @@ public class UserController {
     public void update(@RequestBody UserDto user){
         userService.update(user);
     }
+
 }
