@@ -1,4 +1,4 @@
-package project.controller;
+package project.entity;
 
 
 import jakarta.persistence.*;
@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import project.dto.UserDto;
+
+import java.util.List;
 
 @Table(name = "shops")
 @Entity
@@ -24,5 +26,12 @@ public class Shop {
     @Column(name = "address")
     private String address;
 
-    UserDto
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @OneToMany(mappedBy = "shop")
+    private List<Document> documents;
+
 }

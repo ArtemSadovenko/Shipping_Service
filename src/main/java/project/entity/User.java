@@ -4,8 +4,10 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.*;
 import org.hibernate.Hibernate;
+import project.dto.ProductDto;
 import project.enums.UserRole;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -36,7 +38,8 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
 
-
+    @OneToMany(mappedBy = "customer")
+    private List<Order> orders;
 
 
     @Override
