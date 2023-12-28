@@ -3,7 +3,7 @@ package project.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import project.dto.UserDto;
+import project.dto.userDto.CustomerDto;
 import project.exeption.IrregularData;
 import project.mapper.UserMapper;
 import project.repository.UserRepository;
@@ -22,17 +22,17 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public UserDto getById(Long id) {
+    public CustomerDto getById(Long id) {
         return userMapper.EntityToDto(userRepository.findById(id).get());
     }
 
     @Override
-    public void create(UserDto user) {
+    public void create(CustomerDto user) {
         userRepository.save(userMapper.DtoToEntity(user));
     }
 
     @Override
-    public void update(UserDto user) {
+    public void update(CustomerDto user) {
         if (user.getId() == null) {
             throw new IrregularData("ID expected", HttpStatus.BAD_REQUEST);
         }
@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDto> getAll() {
+    public List<CustomerDto> getAll() {
         return userRepository.findAll().stream()
                 .map(e -> userMapper.EntityToDto(e))
                 .collect(Collectors.toList());

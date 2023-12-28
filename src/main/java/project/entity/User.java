@@ -38,9 +38,11 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
 
-    @OneToMany(mappedBy = "customer")
-    private List<Order> orders;
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Order> customerOrders;
 
+    @OneToMany(mappedBy = "courier", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Order> courierOrders;
 
     @Override
     public boolean equals(Object o) {

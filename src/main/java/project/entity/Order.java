@@ -1,5 +1,6 @@
 package project.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,19 +17,22 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id")
     private User customer;
 
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "shop_id")
     private Shop shop;
 
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "courier_id")
     private User courier;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id")
     private Product product;
 
@@ -42,4 +46,7 @@ public class Order {
     @Column(name = "order_status",
             columnDefinition = "ENUM('OPEN', 'IN_PROGRESS', 'READY_TO_DELIVER', 'DELIVERING', 'COMPLETED')")
     private OrderStatus orderStatus;
+
+
+
 }

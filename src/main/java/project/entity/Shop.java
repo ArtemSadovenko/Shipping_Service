@@ -5,8 +5,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import project.dto.UserDto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Table(name = "shops")
@@ -31,7 +31,16 @@ public class Shop {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(mappedBy = "shop")
+    @OneToMany(mappedBy = "shop", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Document> documents;
 
+
+    public List<Product> getProducts(){
+        List<Product> products = new ArrayList<>();
+//        for (Document doc: documents) {
+//            products.add(doc.getProduct());
+//        }
+        documents.forEach(e -> products.add(e.getProduct()));
+        return products;
+    }
 }

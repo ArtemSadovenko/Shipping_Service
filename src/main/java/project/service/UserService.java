@@ -1,17 +1,16 @@
 package project.service;
 
-import org.springframework.stereotype.Service;
-import project.dto.UserDto;
+import project.dto.userDto.CustomerDto;
 
 import java.util.List;
 
 public interface UserService {
-    UserDto getById(Long id);
+    CustomerDto getById(Long id);
 
-    void create(UserDto user);
+    void create(CustomerDto user);
 
-    void update(UserDto user);
+    void update(CustomerDto user);
 
-    List<UserDto> getAll();
+    List<CustomerDto> getAll();
 
 }

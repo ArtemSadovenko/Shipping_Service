@@ -1,10 +1,8 @@
 package project.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import project.dto.UserDto;
-import project.enums.UserRole;
+import project.dto.userDto.CustomerDto;
 import project.service.UserService;
 
 import java.util.List;
@@ -17,22 +15,22 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/")
-    public List<UserDto> getAll(){
+    public List<CustomerDto> getAll(){
         return userService.getAll();
     }
 
     @PostMapping("/create")
-    public void create(@RequestBody UserDto user){
+    public void create(@RequestBody CustomerDto user){
         userService.create(user);
     }
 
     @PutMapping("/")
-    public void update(@RequestBody UserDto user){
+    public void update(@RequestBody CustomerDto user){
         userService.update(user);
     }
 
     @GetMapping("/{id}")
-    public UserDto findById(@PathVariable Long id){
+    public CustomerDto findById(@PathVariable Long id){
         return userService.getById(id);
     }
 }
