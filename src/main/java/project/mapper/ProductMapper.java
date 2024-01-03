@@ -7,7 +7,7 @@ import project.entity.Product;
 @Component
 public class ProductMapper {
 
-    public Product DtoToEntity(ProductDto dto){
+    public static Product DtoToEntity(ProductDto dto){
         Product entity = new Product();
 
         entity.setId(dto.getId());
@@ -18,7 +18,7 @@ public class ProductMapper {
         return entity;
     }
 
-    public ProductDto EntityToDto(Product entity){
+    public static ProductDto EntityToDto(Product entity){
         ProductDto dto = new ProductDto();
 
         dto.setId(entity.getId());

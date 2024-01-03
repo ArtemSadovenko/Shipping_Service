@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import project.dto.ProductDto;
 import project.exeption.IrregularData;
+import project.exeption.OrElseException;
 import project.mapper.ProductMapper;
 import project.repository.ProductRepository;
 import project.service.ProductService;
@@ -18,17 +19,15 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    @Autowired
-    private ProductMapper productMapper;
 
     @Override
     public ProductDto getById(Long id) {
-        return productMapper.EntityToDto(productRepository.findById(id).get());
+        return ProductMapper.EntityToDto(productRepository.findById(id).get());//.orElseThrow(new OrElseException("No such item", HttpStatus.NOT_FOUND));
     }
 
     @Override
     public void create(ProductDto product) {
-        productRepository.save(productMapper.DtoToEntity(product));
+        productRepository.save(ProductMapper.DtoToEntity(product));
     }
 
     @Override
@@ -37,14 +36,14 @@ public class ProductServiceImpl implements ProductService {
         if (product.getId() == null) {
             throw new IrregularData("ID expected", HttpStatus.BAD_REQUEST);
         } else {
-            productRepository.save(productMapper.DtoToEntity(product));
+            productRepository.save(ProductMapper.DtoToEntity(product));
         }
     }
 
     @Override
     public List<ProductDto> getAll() {
         return productRepository.findAll().stream()
-                .map(e -> productMapper.EntityToDto(e))
+                .map(ProductMapper::EntityToDto)
                 .collect(Collectors.toList());
     }
 }
