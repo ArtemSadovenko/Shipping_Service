@@ -1,16 +1,28 @@
 package project.service;
 
 import project.dto.userDto.CustomerDto;
+import project.dto.userDto.UserDto;
+import project.dto.userDto.UserInitDto;
+import project.entity.User;
 
 import java.util.List;
 
 public interface UserService {
-    CustomerDto getById(Long id);
+    //All
+    User getEntityById(Long id);
 
-    void create(CustomerDto user);
+    List<UserDto> getAll();
 
-    void update(CustomerDto user);
+    void create(UserInitDto user);
 
-    List<CustomerDto> getAll();
+    void update(UserInitDto user);
+    //Admin
+    List<User> getAllEntity();
+
+    //Customer
+    // -//-
+
+    //Courier
+    // -//-
 
 }

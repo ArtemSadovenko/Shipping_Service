@@ -22,7 +22,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDto getById(Long id) {
-        return ProductMapper.EntityToDto(productRepository.findById(id).get());//.orElseThrow(new OrElseException("No such item", HttpStatus.NOT_FOUND));
+        return ProductMapper.EntityToDto(productRepository.findById(id).orElseThrow(() -> new IrregularData("No such item", HttpStatus.NOT_FOUND)));
     }
 
     @Override

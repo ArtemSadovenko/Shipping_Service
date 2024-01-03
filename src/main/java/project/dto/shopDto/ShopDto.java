@@ -13,8 +13,8 @@ import java.util.List;
 @NoArgsConstructor
 public class ShopDto {
     private Long id;
-    private  String name;
-    private  String address;
+    private String name;
+    private String address;
     private UserDto admin;
     private List<ProductDto> products;
 }

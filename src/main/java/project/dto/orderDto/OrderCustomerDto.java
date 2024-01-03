@@ -16,7 +16,7 @@ public class OrderCustomerDto {
     private ShopInsertDto shop;
     private UserDto courier;
     private ProductDto product;
-    private  String shippingAddress;
-    private  Integer amount;
-    private  OrderStatus orderStatus;
+    private String shippingAddress;
+    private Integer amount;
+    private OrderStatus orderStatus;
 }
