@@ -16,7 +16,7 @@ public class ProductController {
 
     @GetMapping("/")
     public List<ProductDto> getAll(){
-        return userService.getAll();
+        return userService.findAll();
     }
 
     @PostMapping("/create")
@@ -31,6 +31,6 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public ProductDto findById(@PathVariable Long id){
-        return userService.getById(id);
+        return userService.fingById(id);
     }
 }

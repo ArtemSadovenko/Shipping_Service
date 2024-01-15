@@ -9,15 +9,19 @@ import java.util.List;
 
 public interface UserService {
     //All
-    User getEntityById(Long id);
+    User getById(Long id);
 
-    List<UserDto> getAll();
+    void delete(Long id);
+
+    UserDto findById(Long id);
+
+    List<UserDto> findAll();
 
     void create(UserInitDto user);
 
     void update(UserInitDto user);
     //Admin
-    List<User> getAllEntity();
+    List<User> getAll();
 
     //Customer
     // -//-

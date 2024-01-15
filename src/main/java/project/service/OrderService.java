@@ -10,11 +10,17 @@ import java.util.List;
 public interface OrderService {
 
     //All
-    void createOrder(OrderInitDto dto);
-    void updateOrder(OrderInitDto dto);
-    Order findEntityById(Long id);
+    void create(OrderInitDto dto);
+    void update(OrderInitDto dto);
+    void delete(Long id);
+
+    OrderDto findById(Long id);
 
     List<OrderDto> getAllOrdersDto();
+    //Admin
+    Order getById(Long id);
+
+    List<Order> getAll();
     //Courier
     void UpdateOrderStatus(OrderStatus status);
 

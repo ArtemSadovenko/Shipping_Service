@@ -21,7 +21,7 @@ public class ProductServiceImpl implements ProductService {
 
 
     @Override
-    public ProductDto getById(Long id) {
+    public ProductDto fingById(Long id) {
         return ProductMapper.EntityToDto(productRepository.findById(id).orElseThrow(() -> new IrregularData("No such item", HttpStatus.NOT_FOUND)));
     }
 
@@ -41,7 +41,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductDto> getAll() {
+    public List<ProductDto> findAll() {
         return productRepository.findAll().stream()
                 .map(ProductMapper::EntityToDto)
                 .collect(Collectors.toList());
