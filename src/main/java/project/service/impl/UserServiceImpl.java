@@ -4,7 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import project.dto.userDto.CustomerDto;
+import project.dto.userDto.UserDto;
+import project.dto.userDto.UserInitDto;
+import project.entity.User;
 import project.exeption.IrregularData;
+import project.exeption.OrElseException;
 import project.mapper.UserMapper;
 import project.repository.UserRepository;
 import project.service.UserService;
@@ -16,37 +20,42 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserRepository userRepository;
+    UserRepository repository;
 
-//    @Autowired
-//    private UserMapper userMapper;
-//
-//    @Override
-//    public CustomerDto getById(Long id) {
-//        return userMapper.EntityToDto(userRepository.findById(id).get());
-//    }
-//
-//    @Override
-//    public void create(CustomerDto user) {
-//        userRepository.save(userMapper.DtoToEntity(user));
-//    }
-//
-//    @Override
-//    public void update(CustomerDto user) {
-//        if (user.getId() == null) {
-//            throw new IrregularData("ID expected", HttpStatus.BAD_REQUEST);
-//        }
-//        else {
-//            userRepository.save(userMapper.DtoToEntity(user));
-//        }
-//    }
-//
-//    @Override
-//    public List<CustomerDto> getAll() {
-//        return userRepository.findAll().stream()
-//                .map(e -> userMapper.EntityToDto(e))
-//                .collect(Collectors.toList());
-//    }
+    @Override
+    public User getById(Long id) {
+        return repository.findById(id).orElseThrow(() -> new IrregularData("No such user", HttpStatus.BAD_REQUEST));//OrElseException("No such user", HttpStatus.BAD_REQUEST));
+    }
 
+    @Override
+    public void delete(Long id) {
+        repository.deleteById(id);
+    }
 
+    @Override
+    public UserDto findById(Long id) {
+        return UserMapper.EntityToUserDto(getById(id));
+    }
+
+    @Override
+    public List<UserDto> findAll() {
+        return repository.findAll().stream()
+                .map(UserMapper::EntityToUserDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public void create(UserInitDto user) {
+        repository.save(UserMapper.DtoToEntity(user));
+    }
+
+    @Override
+    public void update(UserInitDto user) {
+        repository.save(UserMapper.DtoToEntity(user));
+    }
+
+    @Override
+    public List<User> getAll() {
+        return repository.findAll();
+    }
 }

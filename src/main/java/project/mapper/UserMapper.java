@@ -12,36 +12,11 @@ import java.util.stream.Collectors;
 @Component
 public class UserMapper {
 
-//    public CustomerDto EntityToDto(User entity){
-//        CustomerDto dto = new CustomerDto();
-//
-////        dto.setId(entity.getId());
-////        dto.setEmail(entity.getEmail());
-////        dto.setFirstName(entity.getFirstName());
-////        dto.setLastName(entity.getLastName());
-////        dto.setUserRole(entity.getUserRole());
-////        dto.setPassword(entity.getPassword());
-//
-//        return dto;
-//    }
-//
-//    public User DtoToEntity(CustomerDto dto){
-//        User entity = new User();
-//
-////        entity.setId(dto.getId());
-////        entity.setEmail(dto.getEmail());
-////        entity.setFirstName(dto.getFirstName());
-////        entity.setLastName(dto.getLastName());
-////        entity.setUserRole(dto.getUserRole());
-////        entity.setPassword(dto.getPassword());
-//
-//        return entity;
-//    }
-
 
     public static User DtoToEntity(UserInitDto dto){
         var user = new User();
 
+        user.setId(dto.getId());
         user.setUserRole(dto.getUserRole());
         user.setEmail(dto.getEmail());
         user.setFirstName(dto.getFirstName());

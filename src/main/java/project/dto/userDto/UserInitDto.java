@@ -11,6 +11,8 @@ import project.enums.UserRole;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserInitDto {
+    private Long id;
+
     private String firstName;
 
     private String lastName;

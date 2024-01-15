@@ -14,23 +14,23 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/")
-    public List<CustomerDto> getAll(){
-        return userService.getAll();
-    }
-
-    @PostMapping("/create")
-    public void create(@RequestBody CustomerDto user){
-        userService.create(user);
-    }
-
-    @PutMapping("/")
-    public void update(@RequestBody CustomerDto user){
-        userService.update(user);
-    }
-
-    @GetMapping("/{id}")
-    public CustomerDto findById(@PathVariable Long id){
-        return userService.getById(id);
-    }
+//    @GetMapping("/")
+//    public List<CustomerDto> getAll(){
+//        return userService.getAll();
+//    }
+//
+//    @PostMapping("/create")
+//    public void create(@RequestBody CustomerDto user){
+//        userService.create(user);
+//    }
+//
+//    @PutMapping("/")
+//    public void update(@RequestBody CustomerDto user){
+//        userService.update(user);
+//    }
+//
+//    @GetMapping("/{id}")
+//    public CustomerDto findById(@PathVariable Long id){
+//        return userService.getById(id);
+//    }
 }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import project.dto.ProductDto;
+import project.entity.Product;
 import project.exeption.IrregularData;
 import project.exeption.OrElseException;
 import project.mapper.ProductMapper;
@@ -17,33 +18,43 @@ import java.util.stream.Collectors;
 public class ProductServiceImpl implements ProductService {
 
     @Autowired
-    private ProductRepository productRepository;
+    private ProductRepository repository;
 
 
     @Override
     public ProductDto fingById(Long id) {
-        return ProductMapper.EntityToDto(productRepository.findById(id).orElseThrow(() -> new IrregularData("No such item", HttpStatus.NOT_FOUND)));
-    }
-
-    @Override
-    public void create(ProductDto product) {
-        productRepository.save(ProductMapper.DtoToEntity(product));
-    }
-
-    @Override
-    public void update(ProductDto product) {
-
-        if (product.getId() == null) {
-            throw new IrregularData("ID expected", HttpStatus.BAD_REQUEST);
-        } else {
-            productRepository.save(ProductMapper.DtoToEntity(product));
-        }
+        return ProductMapper.EntityToDto(getById(id));
     }
 
     @Override
     public List<ProductDto> findAll() {
-        return productRepository.findAll().stream()
+        return repository.findAll().stream()
                 .map(ProductMapper::EntityToDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void create(ProductDto product) {
+        repository.save(ProductMapper.DtoToEntity(product));
+    }
+
+    @Override
+    public void update(ProductDto product) {
+        repository.save(ProductMapper.DtoToEntity(product));
+    }
+
+    @Override
+    public Product getById(Long id) {
+        return repository.findById(id).orElseThrow(()->new IrregularData("No such product", HttpStatus.BAD_REQUEST));
+    }
+
+    @Override
+    public List<Product> getAll() {
+        return repository.findAll();
+    }
+
+    @Override
+    public void delete(Long id) {
+        repository.deleteById(id);
     }
 }
