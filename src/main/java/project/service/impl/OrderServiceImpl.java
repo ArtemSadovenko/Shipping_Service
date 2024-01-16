@@ -16,6 +16,7 @@ import project.repository.UserRepository;
 import project.service.OrderService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -52,36 +53,37 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void update(OrderInitDto dto) {
-
+        Order old = getById(dto.getId());
+        old.setOrderStatus(dto.getOrderStatus());
+        orderRepository.save(old);
     }
 
     @Override
     public void delete(Long id) {
-
+        orderRepository.deleteById(id);
     }
 
     @Override
     public OrderDto findById(Long id) {
-        return null;
+        return OrderMapper.EntToDto(getById(id));
     }
 
     @Override
-    public List<OrderDto> getAllOrdersDto() {
-        return null;
+    public List<OrderDto> findAll() {
+        return orderRepository.findAll().stream()
+                .map(OrderMapper::EntToDto)
+                .collect(Collectors.toList());
     }
 
     @Override
     public Order getById(Long id) {
-        return null;
+        return orderRepository.findById(id)
+                .orElseThrow(() -> new IrregularData("No such order", HttpStatus.BAD_REQUEST));
     }
 
     @Override
     public List<Order> getAll() {
-        return null;
+        return orderRepository.findAll();
     }
 
-    @Override
-    public void UpdateOrderStatus(OrderStatus status) {
-
-    }
 }

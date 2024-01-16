@@ -3,7 +3,6 @@ package project.service;
 import project.dto.orderDto.OrderDto;
 import project.dto.orderDto.OrderInitDto;
 import project.entity.Order;
-import project.enums.OrderStatus;
 
 import java.util.List;
 
@@ -16,13 +15,13 @@ public interface OrderService {
 
     OrderDto findById(Long id);
 
-    List<OrderDto> getAllOrdersDto();
+    List<OrderDto> findAll();
     //Admin
     Order getById(Long id);
 
     List<Order> getAll();
     //Courier
-    void UpdateOrderStatus(OrderStatus status);
+
 
 
 

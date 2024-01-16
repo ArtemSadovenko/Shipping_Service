@@ -7,6 +7,7 @@ import project.dto.shopDto.ShopDto;
 import project.dto.shopDto.ShopInitDto;
 import project.entity.Shop;
 import project.entity.User;
+import project.enums.UserRole;
 import project.exeption.IrregularData;
 import project.mapper.ShopMapper;
 import project.repository.ShopRepository;
@@ -30,6 +31,9 @@ public class ShopServiceImpl implements ShopService {
     public void create(ShopInitDto dto) {
         User admin = userRepository.findById(dto.getAdminId())
                 .orElseThrow(()-> new IrregularData("No Such User", HttpStatus.BAD_REQUEST));
+        if(!admin.getUserRole().equals(UserRole.SHOP_OWNER)){
+            throw new IrregularData("This user can`t be assigned as shop owner", HttpStatus.BAD_REQUEST);
+        }
         Shop shop = ShopMapper.DtoToEntity(dto);
         shop.setUser(admin);
         shopRepository.save(shop);

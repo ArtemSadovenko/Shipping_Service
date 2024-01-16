@@ -2,8 +2,12 @@ package project.dto.orderDto;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import project.dto.ProductDto;
+import project.dto.shopDto.ShopInsertDto;
+import project.dto.userDto.UserDto;
 import project.entity.Product;
 import project.entity.Shop;
 import project.entity.User;
@@ -12,16 +16,17 @@ import project.enums.OrderStatus;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 public class OrderDto {
     private Long id;
 
-    private User customer;
+    private UserDto customer;
 
-    private Shop shop;
+    private ShopInsertDto shop;
 
-    private User courier;
+    private UserDto courier;
 
-    private Product product;
+    private ProductDto product;
 
     private String shippingAddress;
 
