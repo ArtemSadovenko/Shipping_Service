@@ -15,8 +15,9 @@ public class OrderMapper {
         //shop set manual
         //courier set manual
         //customer set manual
+        //product set manual
         order.setAmount(dto.getAmount());
-        order.setOrderStatus(OrderStatus.OPEN);
+        order.setOrderStatus(dto.getOrderStatus());
         order.setShippingAddress(dto.getShippingAddress());
 
         return order;

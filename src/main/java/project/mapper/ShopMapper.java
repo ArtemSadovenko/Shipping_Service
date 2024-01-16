@@ -59,6 +59,7 @@ public class ShopMapper {
 
         shop.setAddress(dto.getAddress());
         shop.setName(dto.getName());
+        shop.setId(dto.getId());
         //not implements admin set. Necessary to set admin from outside
 
         return shop;
