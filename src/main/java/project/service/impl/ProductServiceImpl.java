@@ -5,8 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import project.dto.ProductDto;
 import project.entity.Product;
-import project.exeption.IrregularData;
-import project.exeption.OrElseException;
+import project.exeption.InvalidData;
 import project.mapper.ProductMapper;
 import project.repository.ProductRepository;
 import project.service.ProductService;
@@ -45,7 +44,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product getById(Long id) {
-        return repository.findById(id).orElseThrow(()->new IrregularData("No such product", HttpStatus.BAD_REQUEST));
+        return repository.findById(id).orElseThrow(()->new InvalidData("No such product", HttpStatus.BAD_REQUEST));
     }
 
     @Override

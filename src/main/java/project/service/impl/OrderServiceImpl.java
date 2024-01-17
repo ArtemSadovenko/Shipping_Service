@@ -7,7 +7,7 @@ import project.dto.orderDto.OrderDto;
 import project.dto.orderDto.OrderInitDto;
 import project.entity.Order;
 import project.enums.OrderStatus;
-import project.exeption.IrregularData;
+import project.exeption.InvalidData;
 import project.mapper.OrderMapper;
 import project.repository.OrderRepository;
 import project.repository.ProductRepository;
@@ -39,15 +39,16 @@ public class OrderServiceImpl implements OrderService {
     public void create(OrderInitDto dto) {
         Order order = OrderMapper.DtoToEntity(dto);
         order.setCustomer(userRepository.findById(dto.getCustomerId())
-                .orElseThrow(() -> new IrregularData("No such customer", HttpStatus.BAD_REQUEST)));
+                .orElseThrow(() -> new InvalidData("No such customer", HttpStatus.BAD_REQUEST)));
         order.setCourier(userRepository.findById(dto.getCourierId())
-                .orElseThrow(() -> new IrregularData("No such courier", HttpStatus.BAD_REQUEST)));
+                .orElseThrow(() -> new InvalidData("No such courier", HttpStatus.BAD_REQUEST)));
         order.setShop(shopRepository.findById(dto.getShopId())
-                .orElseThrow(() -> new IrregularData("No such shop", HttpStatus.BAD_REQUEST)));
+                .orElseThrow(() -> new InvalidData("No such shop", HttpStatus.BAD_REQUEST)));
         order.setProduct(productRepository.findAll().stream()
                 .filter(e -> e.getName() != dto.getProductName())
                 .findFirst()
-                .orElseThrow(() -> new IrregularData("No such product", HttpStatus.BAD_REQUEST)));
+                .orElseThrow(() -> new InvalidData("No such product", HttpStatus.BAD_REQUEST)));
+        order.setOrderStatus(OrderStatus.OPEN);
         orderRepository.save(order);
     }
 
@@ -78,7 +79,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order getById(Long id) {
         return orderRepository.findById(id)
-                .orElseThrow(() -> new IrregularData("No such order", HttpStatus.BAD_REQUEST));
+                .orElseThrow(() -> new InvalidData("No such order", HttpStatus.BAD_REQUEST));
     }
 
     @Override

@@ -10,8 +10,8 @@ import java.util.NoSuchElementException;
 
 @ControllerAdvice
 public class ExceptionHandlerService {
-    @ExceptionHandler(value = IrregularData.class )
-    public ResponseEntity<Object> handleServiceException(final IrregularData ex, final WebRequest request) {
+    @ExceptionHandler(value = InvalidData.class )
+    public ResponseEntity<Object> handleServiceException(final InvalidData ex, final WebRequest request) {
         return ResponseEntity
                 .status(ex.getStatus())
                 .body(new MessageDto(ex.getMessage(), ex.getStatus()));

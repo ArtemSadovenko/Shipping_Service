@@ -41,5 +41,10 @@ public class DocumentController {
         dto.setId(id);
         documentService.update(dto);
     }
+
+    @PostMapping("/create")
+    public void create(@RequestBody DocumentDto dto){
+        documentService.create(dto);
+    }
 }
 

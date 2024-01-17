@@ -3,12 +3,10 @@ package project.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import project.dto.userDto.CustomerDto;
 import project.dto.userDto.UserDto;
 import project.dto.userDto.UserInitDto;
 import project.entity.User;
-import project.exeption.IrregularData;
-import project.exeption.OrElseException;
+import project.exeption.InvalidData;
 import project.mapper.UserMapper;
 import project.repository.UserRepository;
 import project.service.UserService;
@@ -24,7 +22,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getById(Long id) {
-        return repository.findById(id).orElseThrow(() -> new IrregularData("No such user", HttpStatus.BAD_REQUEST));//OrElseException("No such user", HttpStatus.BAD_REQUEST));
+        return repository.findById(id).orElseThrow(() -> new InvalidData("No such user", HttpStatus.BAD_REQUEST));//OrElseException("No such user", HttpStatus.BAD_REQUEST));
     }
 
     @Override

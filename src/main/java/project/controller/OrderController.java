@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import project.dto.orderDto.OrderDto;
 import project.dto.orderDto.OrderInitDto;
+import project.enums.OrderStatus;
 import project.security.JwtService;
 import project.service.OrderService;
 

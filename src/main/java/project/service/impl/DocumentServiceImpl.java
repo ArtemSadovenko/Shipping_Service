@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import project.dto.DocumentDto;
 import project.entity.Document;
-import project.exeption.IrregularData;
+import project.exeption.InvalidData;
 import project.repository.DocumentRepository;
 import project.repository.ProductRepository;
 import project.repository.ShopRepository;
@@ -28,12 +28,27 @@ public class DocumentServiceImpl implements DocumentService {
 
     @Override
     public void create(DocumentDto dto) {
+//        documentRepository.save(
+//                Document.builder()
+//                        .shop(shopRepository.findById(dto.getId())
+//                                .orElseThrow(() -> new IrregularData("No such shop", HttpStatus.BAD_REQUEST)))
+//                        .product(productRepository.findById(dto.getProductId())
+//                                .orElseThrow(() -> new IrregularData("No such product", HttpStatus.BAD_REQUEST)))
+//                        .amount(dto.getAmount())
+//                        .build()
+//        );
+//        var doc = new Document();
+//        doc.setProduct(productRepository.findById(dto.getProductId())
+//                .orElseThrow(() -> new IrregularData("No such product", HttpStatus.BAD_REQUEST)));
+//        doc.setShop(shopRepository.findById(dto.getId())
+//                .orElseThrow(() -> new IrregularData("No such shop", HttpStatus.BAD_REQUEST)));
+//        doc.setAmount(dto.getAmount());
         documentRepository.save(
                 Document.builder()
-                        .shop(shopRepository.findById(dto.getId())
-                                .orElseThrow(() -> new IrregularData("No such shop", HttpStatus.BAD_REQUEST)))
+                        .shop(shopRepository.findById(dto.getShopId())
+                                .orElseThrow(() -> new InvalidData("No such shop", HttpStatus.BAD_REQUEST)))
                         .product(productRepository.findById(dto.getProductId())
-                                .orElseThrow(() -> new IrregularData("No such product", HttpStatus.BAD_REQUEST)))
+                                .orElseThrow(() -> new InvalidData("No such product", HttpStatus.BAD_REQUEST)))
                         .amount(dto.getAmount())
                         .build()
         );
@@ -49,7 +64,7 @@ public class DocumentServiceImpl implements DocumentService {
     @Override
     public Document getById(Long id) {
         return documentRepository.findById(id)
-                .orElseThrow(() -> new IrregularData("No such doc", HttpStatus.BAD_REQUEST));
+                .orElseThrow(() -> new InvalidData("No such doc", HttpStatus.BAD_REQUEST));
     }
 
     @Override

@@ -8,7 +8,7 @@ import project.dto.shopDto.ShopInitDto;
 import project.entity.Shop;
 import project.entity.User;
 import project.enums.UserRole;
-import project.exeption.IrregularData;
+import project.exeption.InvalidData;
 import project.mapper.ShopMapper;
 import project.repository.ShopRepository;
 import project.repository.UserRepository;
@@ -30,9 +30,9 @@ public class ShopServiceImpl implements ShopService {
     @Override
     public void create(ShopInitDto dto) {
         User admin = userRepository.findById(dto.getAdminId())
-                .orElseThrow(()-> new IrregularData("No Such User", HttpStatus.BAD_REQUEST));
+                .orElseThrow(()-> new InvalidData("No Such User", HttpStatus.BAD_REQUEST));
         if(!admin.getUserRole().equals(UserRole.SHOP_OWNER)){
-            throw new IrregularData("This user can`t be assigned as shop owner", HttpStatus.BAD_REQUEST);
+            throw new InvalidData("This user can`t be assigned as shop owner", HttpStatus.BAD_REQUEST);
         }
         Shop shop = ShopMapper.DtoToEntity(dto);
         shop.setUser(admin);
@@ -47,13 +47,13 @@ public class ShopServiceImpl implements ShopService {
     @Override
     public Shop getById(Long id) {
         return shopRepository.findById(id)
-                .orElseThrow(() -> new IrregularData("No such shop", HttpStatus.BAD_REQUEST));
+                .orElseThrow(() -> new InvalidData("No such shop", HttpStatus.BAD_REQUEST));
     }
 
     @Override
     public void update(ShopInitDto dto) {
         User admin = userRepository.findById(dto.getAdminId())
-                .orElseThrow(()-> new IrregularData("No Such User", HttpStatus.BAD_REQUEST));
+                .orElseThrow(()-> new InvalidData("No Such User", HttpStatus.BAD_REQUEST));
         Shop shop = ShopMapper.DtoToEntity(dto);
         shop.setUser(admin);
         shopRepository.save(shop);
