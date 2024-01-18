@@ -6,3 +6,14 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
+
+
+  security:
+#    jwt:
+#      secret-key: f53cabf7-a296-4272-9758-fb302c713d87
+    user:
+      roles:
+
+auth:
+  jwt:
+    secret-key: f53cabf7-a296-4272-9758-fb302c713d87

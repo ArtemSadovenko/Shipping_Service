@@ -3,11 +3,14 @@ package project.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.web.bind.annotation.*;
 import project.dto.userDto.CustomerDto;
 import project.dto.userDto.UserDto;
 import project.dto.userDto.UserInitDto;
+import project.enums.UserRole;
 import project.security.JwtService;
+import project.security.UserPrincipal;
 import project.service.UserService;
 
 import java.util.List;
@@ -45,6 +48,13 @@ public class UserController {
     @GetMapping("/test")
     public ResponseEntity<String> test(){
         return new ResponseEntity<>("Hi", HttpStatusCode.valueOf(200));
+    }
+
+    @GetMapping("/test2")
+    public String test2(){
+        return findById(2L).getUserRole().getAuthority();
+//        UserPrincipal p = new UserPrincipal();
+//        SimpleGrantedAuthority
     }
 
     @PostMapping("/create")
