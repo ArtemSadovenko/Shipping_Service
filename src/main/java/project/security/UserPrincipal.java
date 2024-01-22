@@ -1,5 +1,6 @@
 package project.security;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,6 +18,9 @@ public class UserPrincipal implements UserDetails {
 
     private Long userId;
     private String email;
+
+    @JsonIgnore
+    private String password;
     //TODO Ya, Enum is required
     private final Collection<? extends GrantedAuthority> authorities;
 
@@ -30,12 +34,12 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return email;
     }
 
     @Override

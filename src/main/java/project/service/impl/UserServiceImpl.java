@@ -7,6 +7,7 @@ import project.dto.userDto.UserDto;
 import project.dto.userDto.UserInitDto;
 import project.entity.User;
 import project.exeption.InvalidData;
+import project.exeption.LoginException;
 import project.mapper.UserMapper;
 import project.repository.UserRepository;
 import project.service.UserService;
@@ -23,6 +24,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getById(Long id) {
         return repository.findById(id).orElseThrow(() -> new InvalidData("No such user", HttpStatus.BAD_REQUEST));//OrElseException("No such user", HttpStatus.BAD_REQUEST));
+    }
+
+    @Override
+    public User getByEmail(String email) {
+        return repository.findAll().stream()
+                .filter(e -> e.getEmail().equals(email))
+                .findFirst()
+                .orElseThrow(
+                        () -> new LoginException("No such email", HttpStatus.BAD_REQUEST));
     }
 
     @Override

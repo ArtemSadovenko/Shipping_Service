@@ -17,6 +17,13 @@ public class ExceptionHandlerService {
                 .body(new MessageDto(ex.getMessage(), ex.getStatus()));
     }
 
+    @ExceptionHandler(value = LoginException.class)
+    public ResponseEntity<Object> handleServiceException(final LoginException ex, final WebRequest request){
+        return ResponseEntity
+                .status(ex.getStatus())
+                .body(new MessageDto(ex.getMessage(), ex.getStatus()));
+    }
+
     @ExceptionHandler(value = NoSuchElementException.class)
     public ResponseEntity<Object> handleServiceException(final NoSuchElementException ex, final WebRequest request){
         return ResponseEntity

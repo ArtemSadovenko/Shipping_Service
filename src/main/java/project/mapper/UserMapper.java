@@ -6,7 +6,10 @@ import project.dto.userDto.CustomerDto;
 import project.dto.userDto.UserDto;
 import project.dto.userDto.UserInitDto;
 import project.entity.User;
+import project.enums.UserRole;
+import project.security.UserPrincipal;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
@@ -65,5 +68,20 @@ public class UserMapper {
                 .collect(Collectors.toList()));
 
         return dto;
+    }
+
+    public static UserPrincipal UserToPrincipal(User user){
+        var principal = UserPrincipal.builder()
+                .userId(user.getId())
+                .email(user.getEmail())
+                .password(user.getPassword())
+                .authorities(List.of(
+                        UserRole.valueOf(
+                                user.getUserRole().getAuthority())
+                        )
+                )
+                .build();
+
+        return principal;
     }
 }

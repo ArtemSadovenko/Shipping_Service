@@ -31,17 +31,20 @@ public class DocumentController {
         return documentService.getAll();
     }
 
+    //Only for COURIER
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Long id){
         documentService.delete(id);
     }
 
+    //Only for CUSTOMER
     @PutMapping("/{id}")
     public void update(@RequestBody DocumentDto dto, @PathVariable Long id){
         dto.setId(id);
         documentService.update(dto);
     }
 
+    //for CUSTOMER and COURIER
     @PostMapping("/create")
     public void create(@RequestBody DocumentDto dto){
         documentService.create(dto);
